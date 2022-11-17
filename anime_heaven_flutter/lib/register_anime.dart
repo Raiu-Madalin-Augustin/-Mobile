@@ -31,38 +31,54 @@ class _RegisterAnime extends State<RegisterAnime> {
         appBar: AppBar(
           title: const Text("New Anime"),
         ),
-        body: ListView(
-          children: [
-            TextField(controller: controllerName),
-            TextField(controller: controllerGenre),
-            TextField(controller: controllerSeasons),
-            TextField(controller: controllerEpisodes),
-            TextField(controller: controllerRating),
-            ElevatedButton(
-                onPressed: () {
-                  String name = controllerName.text;
-                  String genre = controllerGenre.text;
-                  String seasons = controllerRating.text;
-                  String episodes = controllerEpisodes.text;
-                  String rating = controllerRating.text;
+        body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.blue,
+                Color.fromRGBO(205, 85, 213, 296),
+              ],
+            )),
+            child: ListView(
 
-                  if (name.isNotEmpty &&
-                      genre.isNotEmpty &&
-                      seasons.isNotEmpty &&
-                      episodes.isNotEmpty &&
-                      rating.isNotEmpty) {
-                    Navigator.pop(
-                        context,
-                        Anime(
-                            name: name,
-                            genre: genre,
-                            numberOfSeasonsWatched: int.parse(seasons),
-                            numberOfEpisodesWatched: int.parse(episodes),
-                            rating: int.parse(rating)));
-                  }
-                },
-                child: const Text("Add Anime")),
-          ],
-        ));
+              children: [
+                Text("Name"),
+                TextField(controller: controllerName),
+                Text("Genre"),
+                TextField(controller: controllerGenre),
+                Text("Seasons Watched"),
+                TextField(controller: controllerSeasons),
+                Text("Episodes Watched"),
+                TextField(controller: controllerEpisodes),
+                Text("Rating /10"),
+                TextField(controller: controllerRating),
+                ElevatedButton(
+                    onPressed: () {
+                      String name = controllerName.text;
+                      String genre = controllerGenre.text;
+                      String seasons = controllerRating.text;
+                      String episodes = controllerEpisodes.text;
+                      String rating = controllerRating.text;
+
+                      if (name.isNotEmpty &&
+                          genre.isNotEmpty &&
+                          seasons.isNotEmpty &&
+                          episodes.isNotEmpty &&
+                          rating.isNotEmpty) {
+                        Navigator.pop(
+                            context,
+                            Anime(
+                                name: name,
+                                genre: genre,
+                                numberOfSeasonsWatched: int.parse(seasons),
+                                numberOfEpisodesWatched: int.parse(episodes),
+                                rating: int.parse(rating)));
+                      }
+                    },
+                    child: const Text("Add Anime")),
+              ],
+            )));
   }
 }

@@ -22,8 +22,10 @@ class _ModifyAnime extends State<ModifyAnime> {
     Anime a = widget._anime;
     controllerName = TextEditingController(text: a.name);
     controllerGenre = TextEditingController(text: a.genre);
-    controllerSeasons = TextEditingController(text: a.numberOfSeasonsWatched.toString());
-    controllerEpisodes = TextEditingController(text: a.numberOfEpisodesWatched.toString());
+    controllerSeasons =
+        TextEditingController(text: a.numberOfSeasonsWatched.toString());
+    controllerEpisodes =
+        TextEditingController(text: a.numberOfEpisodesWatched.toString());
     controllerRating = TextEditingController(text: a.rating.toString());
     super.initState();
   }
@@ -31,37 +33,57 @@ class _ModifyAnime extends State<ModifyAnime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Update Anime"),
-      ),
-      body: ListView(
-        children: [
-          TextField(controller: controllerName),
-          TextField(controller: controllerGenre),
-          TextField(controller: controllerSeasons),
-          TextField(controller: controllerEpisodes),
-          TextField(controller: controllerRating),
-          ElevatedButton(
-              onPressed: () {
-                String name = controllerName.text;
-                String genre = controllerGenre.text;
-                String seasons = controllerRating.text;
-                String episodes = controllerEpisodes.text;
-                String rating = controllerRating.text;
+        appBar: AppBar(
+          title: const Text("Update Anime"),
+        ),
+        body: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.blue,
+              Color.fromRGBO(205, 85, 213, 296),
+            ],
+          )),
+          child: ListView(
+            children: [
+              Text("Name"),
+              TextField(controller: controllerName),
+              Text("Genre"),
+              TextField(controller: controllerGenre),
+              Text("Seasons Watched"),
+              TextField(controller: controllerSeasons),
+              Text("Episodes Watched"),
+              TextField(controller: controllerEpisodes),
+              Text("Rating /10"),
+              TextField(controller: controllerRating),
+              ElevatedButton(
+                  onPressed: () {
+                    String name = controllerName.text;
+                    String genre = controllerGenre.text;
+                    String seasons = controllerRating.text;
+                    String episodes = controllerEpisodes.text;
+                    String rating = controllerRating.text;
 
-                if (name.isNotEmpty && genre.isNotEmpty && seasons.isNotEmpty &&
-                    episodes.isNotEmpty && rating.isNotEmpty) {
-                  Navigator.pop(context,
-                      Anime(name: name,
-                          genre: genre,
-                          numberOfSeasonsWatched: int.parse(seasons),
-                          numberOfEpisodesWatched: int.parse(episodes),
-                          rating: int.parse(rating)));
-                }
-              },
-              child: const Text("Save Anime")),
-        ],
-      ),
-    );
+                    if (name.isNotEmpty &&
+                        genre.isNotEmpty &&
+                        seasons.isNotEmpty &&
+                        episodes.isNotEmpty &&
+                        rating.isNotEmpty) {
+                      Navigator.pop(
+                          context,
+                          Anime(
+                              name: name,
+                              genre: genre,
+                              numberOfSeasonsWatched: int.parse(seasons),
+                              numberOfEpisodesWatched: int.parse(episodes),
+                              rating: int.parse(rating)));
+                    }
+                  },
+                  child: const Text("Save Anime")),
+            ],
+          ),
+        ));
   }
 }
