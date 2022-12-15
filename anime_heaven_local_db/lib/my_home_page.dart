@@ -26,7 +26,11 @@ class _MyHomePageState extends State<MyHomePage> {
             future: DatabaseHelper.instance.getGroceries(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<Anime>> snapshot) {
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
+              } else if (!snapshot.hasData) {
                 return Center(child: Text('Loading...'));
               }
               return snapshot.data!.isEmpty
